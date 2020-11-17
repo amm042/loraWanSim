@@ -1,0 +1,24 @@
+loraWanSim: lora network simulator
+
+copyright 2020 Alan Marchiori <amm042@bucknell.edu>
+
+--------------------------------------------------------------------------------
+loraWanSim splits network simulation into three parts:
+ 1. Topology generation
+ 2. Node & gateway transmission schedules
+ 3. Performance evaluation
+
+The goal of this separation is to simplify the simulator and make various
+analyses easier by keeping detailed intermediate files. We focus on LoraWAN
+class A devices using acknowledgments as much of the previous work uses
+unacknowledged transmissions. Future work will include class B (and C) nodes.
+
+This lora simulator is inspired by LoRaSim by Thiemo Voigt and Martin Bor.
+
+  Do LoRa Low-Power Wide-Area Networks Scale? Martin Bor, Utz Roedig,
+  Thiemo Voigt and Juan Alonso, MSWiM '16, http://dx.doi.org/10.1145/2988287.2989163
+
+--------------------------------------------------------------------------------
+
+Test by running unittest discover in the root folder.
+$ python3 -m unittest discover
