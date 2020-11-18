@@ -4,9 +4,9 @@ copyright 2020 Alan Marchiori <amm042@bucknell.edu>
 
 --------------------------------------------------------------------------------
 loraWanSim splits network simulation into three parts:
- 1. Topology generation
- 2. Node & gateway transmission schedules
- 3. Performance evaluation
+ 1. Topology generation (topology.py)
+ 2. Node & gateway transmission schedules (schedule.py)
+ 3. Performance evaluation (evaluate.py)
 
 The goal of this separation is to simplify the simulator and make various
 analyses easier by keeping detailed intermediate files. We focus on LoraWAN
@@ -20,5 +20,4 @@ This lora simulator is inspired by LoRaSim by Thiemo Voigt and Martin Bor.
 
 --------------------------------------------------------------------------------
 
-Test by running unittest discover in the root folder.
-$ python3 -m unittest discover
+Status: active development, not suitable for real use yet.

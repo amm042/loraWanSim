@@ -6,9 +6,9 @@ copyright 2020 Alan Marchiori <amm042@bucknell.edu>
 
 --------------------------------------------------------------------------------
 loraWanSim splits network simulation into three parts:
- 1. Topology generation
- 2. Node & gateway transmission schedules
- 3. Performance evaluation
+ 1. Topology generation (topology.py)
+ 2. Node & gateway transmission schedules (schedule.py)
+ 3. Performance evaluation (evaluate.py)
 
 The goal of this separation is to simplify the simulator and make various
 analyses easier by keeping detailed intermediate files. We focus on LoraWAN
@@ -55,6 +55,8 @@ def main ():
 
     parser.add_argument('nodes', default=10, nargs='?', type=int,
                         help="Number of nodes to generate.")
+    parser.add_argument('-d', '--datadir', default='data',
+                        help='Path to the output file.')
     parser.add_argument('-o', '--output_filename', default='topo.csv',
                         help='Name of the csv output topology file to (over)write.')
     parser.add_argument('--overwrite', default=False,
@@ -88,9 +90,9 @@ def main ():
 
     # remove raw nodes, work on data only from here.
     del nodes
-
-    if os.path.exists(args.output_filename) and not args.overwrite:
-        existing = pd.read_csv(args.output_filename)
+    output_pathfile = os.path.join(args.datadir, args.output_filename)
+    if os.path.exists(output_pathfile) and not args.overwrite:
+        existing = pd.read_csv(output_pathfile)
         maxnode = max(existing['nodeid'])
 
         # copy slice out to a new dataframe.
@@ -99,7 +101,7 @@ def main ():
         newdata['nodeid'] = newdata['nodeid'] + maxnode
         # ignore first row, it's the gateway, we don't want two.
         data = pd.concat([existing, newdata], axis=0)
-    data.to_csv(args.output_filename, index=False)
+    data.to_csv(output_pathfile, index=False)
 
     if args.show:
         import matplotlib.pyplot as plt
