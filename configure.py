@@ -95,8 +95,10 @@ from utils.exception import ApplicationException
               help='Path to configuration.')
 @click.option('--filename', default='network.csv',
               help='Network configuration filename.')
+@click.option('-c', '--country', default='US',
+              help='Country channel plan to use (only US currently supported).')
 @click.pass_context
-def main(ctx, datadir, filename):
+def main(ctx, datadir, filename, country):
     """loraWanSim: lora network simulator
 
     copyright 2020 Alan Marchiori <amm042@bucknell.edu>
@@ -112,6 +114,10 @@ def main(ctx, datadir, filename):
     config = io.load_config(datadir, filename)
     ctx.obj = {'datadir': datadir, 'filename': filename, 'config': config}
 
+    if country=='US':
+        import lorastd.us902
+        ctx.obj['channels'] = lorastd.us902.us902()
+
 @main.command(short_help='List configuration items')
 @click.pass_context
 def ls(ctx):
@@ -121,8 +127,25 @@ def ls(ctx):
 
 @main.command(short_help='Add node(s) to a network configuration.')
 @click.pass_context
-@click.argument('nodes', default=1)
-def add(ctx, nodes):
+@click.option('-n', '--nodes', default=1,
+                help='How many (identical) nodes to add.')
+@click.option('--nodeid', default=None,
+                help='Node id, Default (None) auto increments.')
+@click.option('-c', '--channels', default='[8,9,10,11,12,13,14,15]',
+                help='JSON-style list of channel numbers for transmissions')
+@click.option('-t', '--tx_schedule', default='periodic',
+                type=click.Choice(['periodic', 'random']),
+                help="""How the nodes transmit.
+                Periodic sends one message every interval with a defined jitter.
+                Random sends one message every interval at a random time in each interval.
+                """)
+@click.option('-s', '--payload_size', default=12,
+                help="Payload size in bytes")
+@click.option('-p','--period', default = 60*1000,
+                help="Period for transmission in milliseconds (ms).")
+@click.option('-j','--jitter', default = 300,
+                help="Jitter for transmission in milliseconds (ms).")
+def add(ctx, nodes, nodeid, channels, tx_schedule, payload_size, period, jitter):
     "Add a node to a network configuration."
 
     pass
