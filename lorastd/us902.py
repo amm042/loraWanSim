@@ -1,3 +1,7 @@
+"""
+Stores the official US902-928MHz configuration parameters. 
+"""
+
 from .lorastd import lora, channel
 
 #ref https://lora-alliance.org/sites/default/files/2018-05/lorawan-regional-parameters-v1.1ra.pdf

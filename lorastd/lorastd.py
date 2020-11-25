@@ -1,4 +1,6 @@
-
+"""
+Some basic LoRa definitions
+"""
 class lora:
     BW_NA = 0
     BW_125 = 125
@@ -21,6 +23,9 @@ class lora:
 
 
 class channel():
+    """
+    A channel is defined be all the relevant parameters.
+    """
     def __init__(self, freq_khz, bw, dr, cr):
         self.freq_khz = freq_khz
         self.bw = bw

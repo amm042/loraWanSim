@@ -3,10 +3,18 @@ loraWanSim: lora network simulator
 copyright 2020 Alan Marchiori <amm042@bucknell.edu>
 
 --------------------------------------------------------------------------------
-loraWanSim splits network simulation into three parts:
+loraWanSim splits network simulation into several parts:
  1. Topology generation (topology.py)
- 2. Node & gateway transmission schedules (schedule.py)
- 3. Performance evaluation (evaluate.py)
+      - Where the nodes are located.
+ 2. Node configuration (configure.py)
+      - The Lora configuration of the nodes.
+ 3. Application information (application.py)
+      - Node application behavior (transmission/retransmission/etc).
+ 4. Simulation (simulate.py)
+      - Takes topology, configuration, and application information to generate
+      transmission/reception logs.
+ 5. Performance evaluation (evaluate.py)
+      - Computes and visualizes high-level results of a simulation.
 
 The goal of this separation is to simplify the simulator and make various
 analyses easier by keeping detailed intermediate files. We focus on LoraWAN
@@ -17,7 +25,6 @@ This lora simulator is inspired by LoRaSim by Thiemo Voigt and Martin Bor.
 
   Do LoRa Low-Power Wide-Area Networks Scale? Martin Bor, Utz Roedig,
   Thiemo Voigt and Juan Alonso, MSWiM '16, http://dx.doi.org/10.1145/2988287.2989163
-
 --------------------------------------------------------------------------------
 
 Status: active development, not suitable for real use yet.

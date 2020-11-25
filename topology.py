@@ -4,21 +4,7 @@ loraWanSim: lora network simulator
 
 copyright 2020 Alan Marchiori <amm042@bucknell.edu>
 
---------------------------------------------------------------------------------
-loraWanSim splits network simulation into three parts:
- 1. Topology generation (topology.py)
- 2. Node & gateway transmission schedules (schedule.py)
- 3. Performance evaluation (evaluate.py)
-
-The goal of this separation is to simplify the simulator and make various
-analyses easier by keeping detailed intermediate files. We focus on LoraWAN
-class A devices using acknowledgments as much of the previous work uses
-unacknowledged transmissions. Future work will include class B (and C) nodes.
-
-This lora simulator is inspired by LoRaSim by Thiemo Voigt and Martin Bor.
-
-  Do LoRa Low-Power Wide-Area Networks Scale? Martin Bor, Utz Roedig,
-  Thiemo Voigt and Juan Alonso, MSWiM '16, http://dx.doi.org/10.1145/2988287.2989163
+See README for important background info.
 --------------------------------------------------------------------------------
  _                    _
 | |                  | |
@@ -34,12 +20,15 @@ Generates lora network topologies to be used in lora network simulations.
 Node positions are specified in 2-dimensional coordinates in units of meters
 from the origin, where the gateway node is located.
 
-Currently only a single gateway node is supported.
+Currently only a single gateway node is supported (assumed to be node 0).
+
+The output is a CSV file with three columns: {NodeId, xpos, ypos}.
+Each row is a node location.
 --------------------------------------------------------------------------------
 """
 
 import argparse
-from utils.io import write_topo
+
 import pandas as pd
 import os.path
 

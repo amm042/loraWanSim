@@ -2,6 +2,8 @@ import os
 import os.path
 from .exception import ApplicationException
 import pandas
+
+raise DeprecationWarning("This isn't used.")
 def ensure_exists(path, file):
     os.makedirs(path, exist_ok=True)
 
